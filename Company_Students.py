@@ -54,22 +54,43 @@ def order_golar(student_list_all):
         tmpgolar = student_list_all[i].golar
         tmpstudent = Student(None,0,None)
         tmpstudent.copyone(student_list_all[i])
+        print ("I",i,student_item_i.student_name)
+        print("++++++")
+
+        topindex=i
         
+        print("start",i,tmpgolar)
         for j,student_item_j in enumerate(student_list_all[i:]):
-            if tmpgolar < student_list_all[j].golar:
-                tmpstudent2 = Student(None,0,None)
-                tmpstudent2.copyone(student_list_all[i])
-                student_list_all[i].copyone(student_list_all[j])
-                student_list_all[j].copyone(tmpstudent2)
+            print("J",j,student_item_j.student_name,student_item_j.golar, tmpgolar)
+            if tmpgolar < student_item_j.golar:
+                print("changed!! ",tmpgolar,student_item_j.golar)
+                tmpgolar = student_item_j.golar
+                topindex=j+i
                 
-                tmpstudent.copyone(student_list_all[j])
-                pass
-  
+
+        print("top",topindex)
+        tmpstudent2 = Student(None,0,None)
+        tmpstudent2.copyone(student_list_all[i])
+        student_list_all[i].copyone(student_list_all[topindex])
+        
+        tmpstudent.copyone(student_list_all[topindex])
+        
+        student_list_all[topindex].copyone(tmpstudent2)
+                        
+        print("show<<<<<")
+        for ixp in student_list_all:
+            print(ixp.student_name, ixp.golar)
+        print("show>>>>>>")  
+
+        print("===============================",tmpstudent.student_name)    
         ordered_student_list.append(tmpstudent)
         
     return ordered_student_list
     pass
     
+
+
+
 
 def Init_Ctx():
     studentlist=[Student("1",89,[1,2,4]),
@@ -93,8 +114,10 @@ def Init_Ctx():
 
 def entry():
     orderlist = Init_Ctx()
+    
+    print(orderlist)
     for ix in orderlist:
-        print(ix.student_name,)
+        print(ix.student_name)
         pass
     pass
 
